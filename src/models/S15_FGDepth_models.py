@@ -126,6 +126,6 @@ class FGDepth(nn.Module):
     up3 += down1             #(96,96,128)
     scale4 = nn.functional.interpolate(up3, scale_factor=2, mode='bilinear')  #(192,192,128)
     up4 = self.blck8(scale4)        #(192,192,64)
-    outDepth = self.ConvLast(up4)   #(192,192,1)
+    outDepth = self.convLast(up4)   #(192,192,1)
 
     return outMask, outDepth		
