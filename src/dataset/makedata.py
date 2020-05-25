@@ -2,6 +2,7 @@ import torch
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader, Dataset
+from PIL import Image
 
 class Makedata(Dataset):
   def __init__(self,image_path,content_list, start_rec, end_rec, transform1, transform2, transform3, transform4, do_transform=True):
