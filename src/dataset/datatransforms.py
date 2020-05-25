@@ -24,7 +24,7 @@ class Transforms_custom:
            
           return transforms.Compose(transforms_list)
           
-      def test_transforms(self, height=None, width=None,):
+      def test_transforms(self, height=None, width=None):
           transforms_list = [transforms.Resize((height,width))]
           transforms_list.append(transforms.ToTensor())
           return transforms.Compose(transforms_list)    
