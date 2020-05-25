@@ -1,18 +1,37 @@
 # S15B - FG and Depth Detection 
 ### Problem Statement : 
-Given a background image(bg) and same background image with a foreground(fg) object in it - fgbg , network should predict foreground mask and depth of fg_bg image to assess how far the fg object is w.r.to camera for the given bg.
-### Important Points:
-- Background images selected were of malls & foreground images selected were of sports players and people. Hence curves were complex.
-- BCELoss, SSIM & DiceLoss were tried out. DiceLoss was used for Masks (FG detection) and SSIM was used for Depth.
-- Initial training was done with Diceloss for both Mask & Depth. Mask was coming out well but Depth was not improving. 
-- After certain epochs, Mask layers were frozen, weights saved so far were used to load model and Loss function for Depth was switched  to SSIM. Only Depth layer parameters were made trainable.
-- Training was done for few more epochs. This made depth improve significantly while retaining the mask quality as such.
-- Weights gathered this way were used to test the test-set images (70:30 split was adopted).
-- Data strategy adopted for training & testing is detailed below in data-load section.
-- Network used was a custom one with 8.8 million parameters. Details are present in Network Section. Even with this light weight network, decent results were achieved as listed below.
-### Result snapshot
-###### Mask Predctions images
-![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15A_Depth_FG_Detection_DataPrep/blob/master/Images_For_ReadMe/BG_Sample10.png)
+Given a background image(bg) and same background image with a foreground(fg) object in it - fgbg , network should predict foreground mask and depth of fg_bg image to assess how far the fg object is w.r.to camera for the given bg. 
+
+### Results
+###### Mask Prediction
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Mask_Prediction.png)
+###### Mask Ground-Truth
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Ground%20Truth_Mask.png)
+###### Depth Prediction
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Depth%20Prediction.png)
+###### Depth Ground-Truth
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Ground%20Truth_Depth.png)
+###### FGBG
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/FG_BG.png)
+###### Link to main ipynb file : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction.ipynb
+
+### Relevant Points:
+- Background images selected were of malls & foreground images selected were of sports players and people at lesiure. Hence curves were complex. 
+- BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
+- Hence tried out SSIM for both mask and depth. Since, loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
+- It became evident that same loss function cant be used for both mask & depth. Also, training both together is not helping as one loss is getting priority over another. 
+- Since mask was coming out well with diceloss & depth was coming out well with SSIM, it was decided to use different loss functions for each. 
+- Transfer learning was put into use to make sure that losses are not contradicting each other.
+- Hence initial epochs were trained with diceloss for both depth & mask. As expected, mask improved well while depth was not improving.
+- Model parameters thus achieved was saved.
+- Then Mask convolution layers were frozen, weights saved so far were used to re-load model and Loss function for Depth was switched  to SSIM. Only Depth layer parameters were made trainable.
+- Training was done for few more epochs. This made depth improve significantly while retaining the mask quality as such because we are not making any changes to mask layer weights.
+- Thus network was able to achieve good results for both mask & depth. 
+- Trained network was then tested against the test-set images (70:30 split was adopted).
+- Data strategy adopted for training & testing is detailed below in data-load section. Resizing was done to manage the testing times.
+- Network used was a custom one with 8,801,568 parameters. Details are present in Network Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed below (images were complex as mentioned above ).
+- Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
+
 ### Data-Load
 Data-load strategy used is as follows:
 - Total data-set of 400K images were split into 280K training images and 120K testing images.(70:30 split).
@@ -25,8 +44,12 @@ Data-load strategy used is as follows:
 - Then testing was done for 120K testing images with the weights loaded so far.
 - Same strategy was repeated for different size of data. Model was saved after each set of training and weights saved were carried over for further training by loading the model from last saved weights (application of transfer learning).
 - Source code for dataloader and trabsforms can be seen in https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/dataset
+
 ## Network
-- Network used was 
+- Network used was custom one. https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
+
 ## Loss Functions
-## Strategy Used
+- BCELOSS, SSIM and Diceloss were tried out.
+- Eventually Diceloss was used for mask and SSIM for depth
+
 
