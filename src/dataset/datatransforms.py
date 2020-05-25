@@ -12,9 +12,8 @@ class Transforms_custom:
           transforms_list = [transforms.Resize((height,width))]
           if before_norm:
              transforms_list.extend(before_norm)
-             transforms_list.append(transforms.ToTensor())
-          else:
-             transforms_list = [transforms.ToTensor()]
+           
+          transforms_list.append(transforms.ToTensor())
              
           if (self.normalize):
              transforms_list.append(transforms.Normalize(self.mean,self.stdev))
