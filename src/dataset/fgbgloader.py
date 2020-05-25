@@ -18,7 +18,7 @@ class FGBGLoader(object):
         torch.manual_seed(seed)
 
         cuda = torch.cuda.is_available()
-        print("CUDA Available?", cuda, 'Batch_size:', self.batch_size))
+        print("CUDA Available?", cuda, 'Batch_size:', self.batch_size)
         
 
         if cuda:
