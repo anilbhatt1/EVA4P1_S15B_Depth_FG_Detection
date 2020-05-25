@@ -12,6 +12,38 @@ from kornia.losses import DiceLoss
 
 # # class for Calculating and storing training losses and training accuracies of model for each batch per epoch ## 
 class Train_loss:
+    
+    def draw_show_and_save(tensors, name, figsize=(15,15), *args, **kwargs):
+        try:
+           tensors = tensors.detach().cpu()
+        except:
+           pass
+        grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
+        grid_image  = grid_tensor.permute(1, 2, 0)
+        plt.figure(figsize = figsize)
+        plt.imshow(grid_image)
+        plt.xticks([])
+        plt.yticks([])
+
+        plt.savefig(name, bbox_inches='tight')
+        plt.show()
+        
+    def draw_and_save(tensors, name, figsize=(15,15), *args, **kwargs):
+        try:
+           tensors = tensors.detach().cpu()
+        except:
+           pass
+        grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
+        grid_image  = grid_tensor.permute(1, 2, 0)
+        plt.figure(figsize = figsize)
+        plt.imshow(grid_image)
+        plt.xticks([])
+        plt.yticks([])
+
+        plt.savefig(name, bbox_inches='tight')
+        plt.close()
+       #plt.show()
+    
 
     def train_loss_calc(self,model, device, train_loader, optimizer, epoch, criterion1, criterion2, batch_size, path_name,path_model_save,
                         scheduler=None, model_save_idx=500, img_save_idx=500,maxlr=0):
@@ -90,35 +122,4 @@ class Train_loss:
           train_loss /= len(train_loader.dataset)
           mask_train_loss = test_loss1/len(test_loader.dataset)
           dpth_train_loss = test_loss2/len(test_loader.dataset)
-          return train_loss, mask_train_loss, dpth_train_loss                
-    
-    def draw_show_and_save(tensors, name, figsize=(15,15), *args, **kwargs):
-        try:
-           tensors = tensors.detach().cpu()
-        except:
-           pass
-        grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
-        grid_image  = grid_tensor.permute(1, 2, 0)
-        plt.figure(figsize = figsize)
-        plt.imshow(grid_image)
-        plt.xticks([])
-        plt.yticks([])
-
-        plt.savefig(name, bbox_inches='tight')
-        plt.show()
-        
-    def draw_and_save(tensors, name, figsize=(15,15), *args, **kwargs):
-        try:
-           tensors = tensors.detach().cpu()
-        except:
-           pass
-        grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
-        grid_image  = grid_tensor.permute(1, 2, 0)
-        plt.figure(figsize = figsize)
-        plt.imshow(grid_image)
-        plt.xticks([])
-        plt.yticks([])
-
-        plt.savefig(name, bbox_inches='tight')
-        plt.close()
-       #plt.show()
+          return train_loss, mask_train_loss, dpth_train_loss                    
