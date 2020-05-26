@@ -48,7 +48,7 @@ Data-load strategy used is as follows:
 ## Network
 - Network used was custom one. https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
 - Bilinear interpolation with a scale factor of 2 to upsize during depth prediction. Along with this, transpose convolutions were also  employed during upsizing to enable convolution without padding while maintaining size.
-![Architecture](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/Images)
+![Architecture](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/EVA15%20Network.jpg)
 ## Loss Functions
 - BCELOSS, SSIM and Diceloss were tried out.
 - Eventually Diceloss was used for mask and SSIM for depth.
