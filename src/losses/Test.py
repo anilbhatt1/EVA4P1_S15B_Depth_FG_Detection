@@ -59,11 +59,11 @@ class Testing_loss:
                   print('Test Epoch: {} [{}/{} ({:.0f}%)]\tTest_Loss: {:.6f} Mask_Loss: {:.5f} Dpth_Loss: {:.5f} Mask_IOU: {:.5f} Dpth_IOU: {:.5F}'
                          .format(epoch, batch_idx * len(data), len(test_loader.dataset), (100. * batch_idx / len(test_loader)),
                                  loss.item(), loss1.item(), loss2.item(),mask_iou, depth_iou ))
-                  #draw_and_save(output[0].detach().cpu(),  f'{path_name}Test_{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
-                  #draw_and_save(data['f3'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
-                  #draw_and_save(output[1].detach().cpu(),  f'{path_name}Test_{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
-                  #draw_and_save(data['f4'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
-                  #draw_and_save(data['f1'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')       
+                  flg = draw_and_save(output[0].detach().cpu(),  f'{path_name}Test_{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
+                  flg = draw_and_save(data['f3'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
+                  flg = draw_and_save(output[1].detach().cpu(),  f'{path_name}Test_{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
+                  flg = draw_and_save(data['f4'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
+                  flg = draw_and_save(data['f1'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')       
             
           #test_loss      /= len(test_loader.dataset)
           test_loss      /= num_batches
@@ -84,4 +84,22 @@ class Testing_loss:
         intersection = np.logical_and(np.greater(target, thresh), np.greater(prediction, thresh))
         union = np.logical_or(np.greater(target, thresh), np.greater(prediction, thresh))
         iou_score = np.sum(intersection) / np.sum(union)
-        return iou_score             
+        return iou_score
+        
+      def draw_and_save(self, tensors, name, figsize=(15,15), *args, **kwargs):
+          try:
+            tensors = tensors.detach().cpu()
+          except:
+            pass
+          grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
+          grid_image  = grid_tensor.permute(1, 2, 0)
+          plt.figure(figsize = figsize)
+          plt.imshow(grid_image)
+          plt.xticks([])
+          plt.yticks([])
+
+          plt.savefig(name, bbox_inches='tight')
+          plt.close()
+          flag = True
+         #plt.show()
+          return flag             
