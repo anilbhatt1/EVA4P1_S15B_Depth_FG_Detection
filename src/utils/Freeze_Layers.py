@@ -7,7 +7,6 @@ class Freezer():
         print('Freezing Mask Layers')
         response = False
         for param in model.convA.parameters():
-          print('XYZ')
           param.requires_grad = False
         for param in model.convB.parameters():
           param.requires_grad = False
@@ -43,7 +42,6 @@ class Freezer():
         print('Freezing Depth Layers')
         response = False        
         for param in model.convA.parameters():
-          print('ABCD')        
           param.requires_grad = True
         for param in model.convB.parameters():
           param.requires_grad = True
