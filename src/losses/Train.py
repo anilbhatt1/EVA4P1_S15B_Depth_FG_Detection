@@ -66,11 +66,11 @@ class Training_loss:
                 print('Train Epoch:{} Batch_ID: {} [{}/{} ({:.0f}%)]\tLoss:{:.5f} Mask_Loss:{:.5f} Dpth_Loss:{:.5f} Mask_IOU:{:.5f} Dpth_IOU: {:.5F}'
                       .format(epoch, batch_idx, batch_idx * batch_size, len(train_loader.dataset), (100. * batch_idx / len(train_loader)),
                        loss, loss1, loss2, mask_iou, depth_iou))
-                #draw_and_save(output[0].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
-                #draw_and_save(data['f3'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
-                #draw_and_save(output[1].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
-                #draw_and_save(data['f4'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
-                #draw_and_save(data['f1'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')    
+                flg = self.draw_and_save(output[0].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f3'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(output[1].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f4'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f1'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')    
               
             if batch_idx % model_save_idx == 0:
               torch.save(model.state_dict(),path_model_save)
@@ -96,3 +96,21 @@ class Training_loss:
         union = np.logical_or(np.greater(target, thresh), np.greater(prediction, thresh))
         iou_score = np.sum(intersection) / np.sum(union)
         return iou_score
+        
+    def draw_and_save(self, tensors, name, figsize=(15,15), *args, **kwargs):
+          try:
+            tensors = tensors.detach().cpu()
+          except:
+            pass
+          grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
+          grid_image  = grid_tensor.permute(1, 2, 0)
+          plt.figure(figsize = figsize)
+          plt.imshow(grid_image)
+          plt.xticks([])
+          plt.yticks([])
+
+          plt.savefig(name, bbox_inches='tight')
+          plt.close()
+          flag = True
+         #plt.show()
+          return flag         
