@@ -55,7 +55,7 @@ class Testing_loss:
 
               pbar.set_description(desc = f'TS{int(epoch)}|{int(batch_idx)}|{loss1:.3f}|{loss2:.3f}|{mask_iou:.3f}|{depth_iou:.3f}')   
               
-              if batch_idx % img_save_idx == 0:
+              if batch_idx % img_save_idx == 0 or batch_idx == int(num_batches-1):
                   print('Test Epoch: {} [{}/{} ({:.0f}%)]\tTest_Loss: {:.6f} Mask_Loss: {:.5f} Dpth_Loss: {:.5f} Mask_IOU: {:.5f} Dpth_IOU: {:.5F}'
                          .format(epoch, batch_idx * len(data), len(test_loader.dataset), (100. * batch_idx / len(test_loader)),
                                  loss.item(), loss1.item(), loss2.item(),mask_iou, depth_iou ))
