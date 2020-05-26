@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import torchvision
 import numpy as np
 from tqdm import tqdm
 from torch.optim.lr_scheduler import ReduceLROnPlateau
