@@ -4,16 +4,22 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 
 ### Results
 ###### Mask Prediction
-![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Mask_Prediction.png)
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_MP.jpg)
 ###### Mask Ground-Truth
-![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Ground%20Truth_Mask.png)
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_MA.jpg)
 ###### Depth Prediction
-![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Depth%20Prediction.png)
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_DP.jpg)
 ###### Depth Ground-Truth
-![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/Ground%20Truth_Depth.png)
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_DA.jpg)
 ###### FGBG
-![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/FG_BG.png)
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_FGBG.jpg)
+###### Loss Plots
+![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_LossPlot.png)
 ###### Link to main ipynb file : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction.ipynb
+###### Link to Test-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_test_log.txt
+###### Link to Train-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_train_log.txt
 
 ### Relevant Points:
 - Background images selected were of malls & foreground images selected were of sports players and people at lesiure. Hence curves were complex as human limb positions can be of any shape. 
@@ -23,13 +29,15 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 - It became evident that same loss function cant be used for both mask & depth. Also, training both together is not helping as one loss is getting priority over another. 
 - Since mask was coming out well with diceloss & depth was coming out well with SSIM, it was decided to use different loss functions for each. 
 - Transfer learning was put into use to make sure that losses are not contradicting each other. 
-- Hence initial few epochs were trained with diceloss for depth & mask. As expected, mask improved well while depth was not improving.
+- Hence initial 10 epochs were trained with diceloss for depth & mask. As expected, mask improved well while depth was not improving.
 - Model parameters thus achieved was saved.
 - Then Mask convolution layers were frozen, weights saved so far were used to re-load model, Loss function for Depth was switched  to SSIM and loss function for mask was retained as DiceLoss itself. This way only Depth layer parameters were kept trainable. Data strategy adopetd for this training is listed in 'Data-Load' section below.
 - Training was done for 10 epochs. This improved depth prediction significantly while mask prediction quality was retained as such because no changes were happening to mask layer weights responsible for mask prediction.
 - For next 10 epochs, depth layer was frozen and mask layer was trained. Weights from previous epochs were carried over here. This further improved mask prediction while depth prediction quality didnt deteriorate further because no updates were happening to depth layer weights responsible for depth prediction.
-- Thus network was able to achieve good results for both mask & depth. 
-- For each epoch, trained network was tested against the test-set images of 80K images. Remaining 40K images were tested once whole network was trained.
+- Thus network was able to achieve good results for both mask & depth. Log is not available for this training.
+- For each epoch, trained network was tested against the test-set images of 80K images. 
+- After this, 5 epochs each were trained with same strategy mentioned above. For each epoch, trained network was tested against the entire test-set images of 120K images. 
+- Results and logs of the same are shown at the begining of this section.
 - Data strategy adopted for training & testing is detailed below in data-load section. Resizing was done to manage the testing times.
 - Network used was a custom one with 8,801,568 parameters. Details are present in Network Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed below (images were complex as mentioned above ).
 - Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
