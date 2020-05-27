@@ -35,7 +35,9 @@ class Training_loss:
           train_loss1, train_loss2, train_loss, train_mask_iou_cum, train_depth_iou_cum = 0, 0, 0, 0, 0
           pbar = tqdm(train_loader)
           num_batches = len(train_loader.dataset)/batch_size
-          cuda0 = torch.device('cuda:0')           
+          cuda0 = torch.device('cuda:0')
+          log_path  = path_name + 'train_log.txt'
+          log_file  = open(f'{log_path}, "a")          
 
           for batch_idx, data in enumerate(pbar):
             data['f1'] = data['f1'].to(cuda0)
@@ -43,8 +45,6 @@ class Training_loss:
             data['f3'] = data['f3'].to(cuda0)
             data['f4'] = data['f4'].to(cuda0)
             data['f3O'] = torch.tensor(data['f3'],dtype= torch.int64, device= cuda0)
-            log_path  = path_name + 'train_log.txt'
-            log_file  = open(f'{log_path}, "a")
 
             optimizer.zero_grad()
             output = model(data)
