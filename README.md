@@ -23,7 +23,7 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 
 ### Relevant Points:
 - Background images selected were of malls & foreground images selected were of sports players and people at lesiure. Hence curves were complex as human limb positions can be of any shape. 
-- Before starting with CNN approach, OpenCV-Contour method was tried out as an alternative. But results were far from promising. Hence it was evident that a loss function based approach that can keep improving iteratively is the best option. This prompted to use the CNN approach. Source Code for opencv POC that was tried out: https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/colab_versions/EVA4P1_S15_OpenCV_FG_Identification_V1.ipynb
+- Before starting with CNN approach, OpenCV-Contour method was tried out as an alternative. But results were far from promising. It was evident that a loss function based approach that keeps improving iteratively is the best option.Hence CNN was employed for the purpose. Source Code for opencv POC that was tried out is : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/colab_versions/EVA4P1_S15_OpenCV_FG_Identification_V1.ipynb
 - 400K images were split into 280K train images & 120K test images (70:30 split).
 - BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
 - Hence tried out SSIM for both mask and depth. As loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
