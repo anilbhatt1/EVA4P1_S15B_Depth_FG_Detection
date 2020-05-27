@@ -4,22 +4,22 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 
 ### Results
 ###### Mask Prediction
-![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_MP.jpg)
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_MP_0527.jpg)
 ###### Mask Ground-Truth
-![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_MA.jpg)
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_MA_0527.jpg)
 ###### Depth Prediction
-![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_DP.jpg)
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_DP_0527.jpg)
 ###### Depth Ground-Truth
-![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_DA.jpg)
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_DA_0527.jpg)
 ###### FGBG
-![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_Test_11_624_FGBG.jpg)
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_FGBG_0527.jpg)
 ###### Loss Plots
-![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_LossPlot.png)
+![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_LossPlot_0527.png)
 ###### Link to main ipynb file : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction.ipynb
 ###### Link to Test-Logs :
-https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_test_log.txt
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_test_log.txt
 ###### Link to Train-Logs :
-https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/D0527_S14_train_log.txt
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_train_log.txt
 
 ### Relevant Points:
 - Background images selected were of malls & foreground images selected were of sports players and people at lesiure. Hence curves were complex as human limb positions can be of any shape. 
