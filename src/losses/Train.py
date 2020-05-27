@@ -37,7 +37,7 @@ class Training_loss:
           num_batches = len(train_loader.dataset)/batch_size
           cuda0 = torch.device('cuda:0')
           log_path  = path_name + 'train_log.txt'
-          log_file  = open(f'{log_path}, "a")          
+          log_file  = open(f'{log_path}', "a")          
 
           for batch_idx, data in enumerate(pbar):
             data['f1'] = data['f1'].to(cuda0)
@@ -74,8 +74,8 @@ class Training_loss:
                 flg = self.draw_and_save(output[1].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
                 flg = self.draw_and_save(data['f4'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
                 flg = self.draw_and_save(data['f1'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')
-                string = f' Train Epoch-{int(epoch)}|Batch-{int(batch_idx)|{loss:.5f}|{loss1:.5f}|{loss2:.5f}|{mask_iou:.5f}|{depth_iou:.5f}'
-                wrt = self.log_write(string)                
+                string = f' Train Epoch-{int(epoch)}|Batch-{int(batch_idx)}|Loss-{loss:.5f}|MaskLoss-{loss1:.5f}|DepthLoss-{loss2:.5f}|MaskIOU-{mask_iou:.5f}|DepthIOU-{depth_iou:.5f}'
+                wrt = self.log_write(string, log_file)                
               
             if batch_idx % model_save_idx == 0:
               torch.save(model.state_dict(),path_model_save)
@@ -87,8 +87,8 @@ class Training_loss:
           train_depth_loss  = train_loss2/num_batches
           train_mask_iou    = train_mask_iou_cum/num_batches
           train_depth_iou   = train_depth_iou_cum/num_batches
-          string = f'**Train Epoch-{int(epoch)}|Batch-{int(batch_idx)|{train_loss:.5f}|{train_mask_loss:.5f}|{train_depth_loss:.5f}|{train_mask_iou:.5f}|{train_depth_iou:.5f}'
-          wrt    = self.log_write(string)
+          string = f'*Train Epoch-{int(epoch)}|Batch-{int(batch_idx)}|Loss-{train_loss:.5f}|MaskLoss-{train_mask_loss:.5f}|DepthLoss-{train_depth_loss:.5f}|MaskIOU-{train_mask_iou:.5f}|DepthIOU-{train_depth_iou:.5f}'
+          wrt    = self.log_write(string, log_file)
           log_file.close()          
           return train_loss, train_mask_loss, train_depth_loss, train_mask_iou, train_depth_iou   
 
@@ -123,7 +123,7 @@ class Training_loss:
          #plt.show()
           return flag    
 
-    def log_write(self, string):
+    def log_write(self, string, log_file):
           wrt = False
           write_str = string + '\n'
           log_file.write(write_str)
