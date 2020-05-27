@@ -66,7 +66,8 @@ Data-load strategy used is as follows:
 ## Loss Functions
 - BCELOSS, SSIM and Diceloss were tried out.
 - For final runs, Diceloss was used for mask and SSIM for depth.
-- IOU was used as accuracy metric. 
+- IOU was used as accuracy metric.
+- Source code for test and train loss functions can be see here https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/losses
 ## Further improvements Plans
 - Go for a deeper network to further improve mask & depth predictions. 
 - Use Albumentation data transforms - Cutout, Gaussian Noice, Horizontal Flip.
