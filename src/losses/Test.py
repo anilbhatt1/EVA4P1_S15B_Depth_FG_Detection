@@ -32,6 +32,8 @@ class Testing_loss:
           pbar = tqdm(test_loader)
           num_batches = len(test_loader.dataset)/batch_size
           cuda0 = torch.device('cuda:0')
+          log_path  = path_name + 'test_log.txt'
+          log_file  = open(f'{log_path}, "a")
 
           with torch.no_grad():
             for batch_idx, data in enumerate(pbar):
@@ -64,7 +66,9 @@ class Testing_loss:
                   flg = self.draw_and_save(data['f3'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
                   flg = self.draw_and_save(output[1].detach().cpu(),  f'{path_name}Test_{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
                   flg = self.draw_and_save(data['f4'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
-                  flg = self.draw_and_save(data['f1'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')       
+                  flg = self.draw_and_save(data['f1'].detach().cpu(), f'{path_name}Test_{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')
+                  string = f' Test Epoch-{int(epoch)}|Batch-{int(batch_idx)|{loss:.5f}|{loss1:.5f}|{loss2:.5f}|{mask_iou:.5f}|{depth_iou:.5f}'
+                  wrt = self.log_write(string)
             
           #test_loss      /= len(test_loader.dataset)
           test_loss      /= num_batches
@@ -72,6 +76,9 @@ class Testing_loss:
           test_depth_loss = test_loss2/num_batches
           test_mask_iou   = test_mask_iou_cum/num_batches
           test_depth_iou  = test_depth_iou_cum/num_batches
+          string = f'**Test Epoch-{int(epoch)}|Batch-{int(batch_idx)|{test_loss:.5f}|{test_mask_loss:.5f}|{test_depth_loss:.5f}|{test_mask_iou:.5f}|{test_depth_iou:.5f}'
+          wrt    = self.log_write(string)
+          log_file.close()
           return test_loss, test_mask_loss, test_depth_loss, test_mask_iou, test_depth_iou
 
       def calculate_iou(self, target, prediction, thresh=0.5):
@@ -103,4 +110,11 @@ class Testing_loss:
           plt.close()
           flag = True
          #plt.show()
-          return flag             
+          return flag
+
+      def log_write(self, string):
+          wrt = False
+          write_str = string + '\n'
+          log_file.write(write_str)
+          wrt = True
+          return wrt          
