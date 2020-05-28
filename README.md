@@ -25,6 +25,11 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 - Background images selected were of malls & foreground images selected were of sports players and people at lesiure. Hence curves were complex as human limb positions can be of any shape. 
 - Before starting with CNN approach, OpenCV-Contour method was tried out as an alternative. But results were far from promising. It was evident that a loss function based approach that keeps improving iteratively is the best option.Hence CNN was employed for the purpose. Source Code for opencv POC that was tried out is : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/colab_versions/EVA4P1_S15_OpenCV_FG_Identification_V1.ipynb
 - 400K images were split into 280K train images & 120K test images (70:30 split).
+- Network used was a custom one with 8,801,568 parameters. Details are present in Network Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed above (images were complex as mentioned above ).
+- Since this is image comparison problem, final convolution layers were extracted and fed to the loss function. Final One-hot prediction layers were not included in network as this was not an image classification problem.
+- Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
+- Accuracy metric used was IOU. Since this is a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
+- Scheduler used was StepLR with initial LR of 0.01 & LR decaying by a factor of 0.1 for every 2 epochs.
 - BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
 - Hence tried out SSIM for both mask and depth. As loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
 - It became evident that same loss function cant be used for both mask & depth. Also, training both together is not helping as one loss is getting priority over another. 
@@ -40,10 +45,6 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 - After this, 5 epochs each were trained with same strategy mentioned above. For each epoch, trained network was tested against the entire test-set images of 120K images. 
 - Results and logs of the same are shown at the begining of this section.
 - Data strategy adopted for training & testing is detailed below in data-load section. Resizing was done to manage the testing times.
-- Network used was a custom one with 8,801,568 parameters. Details are present in Network Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed below (images were complex as mentioned above ).
-- Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
-- Accuracy metric used was IOU. Since this is a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
-- Scheduler used was StepLR with initial LR of 0.01 & LR decaying by a factor of 0.1 for every 2 epochs.
 - Tranforms used were torch transforms - resize, colour jitter.
 ### Data-Load
 Data-load strategy used is as follows:
