@@ -70,6 +70,23 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 - Depth -> This is ground-truth. Hence only resize based on epoch was only used.
 - Test Images -> Only resize was used. Wanted to keep all other parameters intact as present in original image.
 - Results and logs of the same are shown as below.
+###### Mask Prediction
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_MP_0530.jpg)
+###### Mask Ground-Truth
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_MA_0530.jpg)
+###### Depth Prediction
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_DP_0530.jpg)
+###### Depth Ground-Truth
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_DA_0530.jpg)
+###### FGBG
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_FGBG_0530.jpg)
+###### Loss Plots
+![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_LossPlot_0530.png)
+###### Link to main ipynb file : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction_Alb_Transforms(no_norm).ipynb
+###### Link to Test-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_test_log.txt
+###### Link to Train-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_train_log.txt
 
 ### Data-Load
 Data-load strategy used is as follows:
