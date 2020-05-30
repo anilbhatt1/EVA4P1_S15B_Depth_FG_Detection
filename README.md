@@ -7,10 +7,11 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 - Before starting with CNN approach, OpenCV-Contour method was tried out as an alternative. But results were far from promising. It was evident that a loss function based approach that keeps improving iteratively is the best option.Hence CNN was employed for the purpose. Source Code for opencv POC that was tried out is : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/colab_versions/EVA4P1_S15_OpenCV_FG_Identification_V1.ipynb
 - 400K images were split into 280K train images & 120K test images (70:30 split).
 - Network used was a custom one with 8,801,568 parameters. Details are present in Network Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed above (images were complex as mentioned above ).
-- Since this is image comparison problem, final convolution layers were extracted and fed to the loss function. Final One-hot prediction layers were not included in network as this was not an image classification problem.
+- Since this is image comparison problem, final convolution layers were extracted and fed to the loss function. One-hot prediction layers were not included in network as this was not an image classification problem.
 - Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
 - Accuracy metric used was IOU. Since this is a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
 - Scheduler used was StepLR with initial LR of 0.01 & LR decaying by a factor of 0.1 for every 2 epochs.
+- Weights were saved at each epoch (per 500 batches) and these weights were carried over for further training by loading the model from last saved weights (application of transfer learning).
 #### Training-1
 - BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
 - Hence tried out SSIM for both mask and depth. As loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
@@ -36,9 +37,10 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 - 260k -280k -> size 192x192    | 
 - 280k -400k -> size 64x64 -> Test dataset
 - First 5 epochs, were with mask layers frozen, ONLY DEPTH was trained. Next 5 epochs were with depth layers frozen, ONLY MASK was trained.
-- Results and logs of the same are shown as below.
+- Results and logs of the same are shown as below. For display purpose after 10 epochs, a test-loader of batch size 8 from 10,000 images were created (out of 120K test images). Below displayed images are from this test_set.
 - Data strategy adopted for training & testing is detailed below in data-load section. Resizing was done to manage the testing times.
 - Tranforms used were torch transforms - resize, colour jitter.
+- Logs and resulting images were saved to gdrive location. Logs were captured in txt files and images as jpg.
 ###### Mask Prediction
 ![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_MP_0527.jpg)
 ###### Mask Ground-Truth
@@ -59,17 +61,18 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 
 #### Training-4
 - Same strategy and data split as in Training-3 was adopted. For each epoch, trained network was tested against the entire test-set images of 120K images. 
-- One difference was that albumentation transforms were used. Apart from resizing, following transforms were used:
+- One improvement was that albumentation transforms were used. Apart from resizing, following transforms were used:
 - FG_BG -> IAAAdditiveGaussianNoise() -> This was used to emulate real-life scenario were noise will be present in cameras
 - FG_BG -> RGB Shift                  -> This was used to make training hard by shifting RGB channel values
 - FG_BG -> Cutout                     -> Certain portions of FG_BG image was cut-out (25% of overall size) so that network will learn to predict without the features those were cut-out. Also in real-life certain portion of image could get cut-out due to various factors.
 - BG    -> IAAAdditiveGaussianNoise() -> This was used to emulate real-life scenario were noise will be present in cameras
 - BG    ->  RGB Shift                 -> This was used to make training hard by shifting RGB channel values
 - BG    -> Cut-Out was NOT USED as we used cut-out already in FG_BG and adding cut-out randomly to BG also will cause adverse affect to network learning. Network may find it hard to figure out background corresponding to fg_bg.
-- Mask  -> This is ground-truth. Hence only resize based on epoch was only used.
-- Depth -> This is ground-truth. Hence only resize based on epoch was only used.
+- Mask  -> This is ground-truth. Hence only resize based on respective epoch/data strategy was used.
+- Depth -> This is ground-truth. Hence only resize based on respective epoch/data strategy was used.
 - Test Images -> Only resize was used. Wanted to keep all other parameters intact as present in original image.
-- Results and logs of the same are shown as below. Mask prediction quality is seen as going down.
+- Results and logs of the same are shown as below. Mask prediction results are seen as going down.
+- For display purpose after 10 epochs, a test-loader of batch size 8 from 10,000 images were created (out of 120K test images). Below displayed images are from this test_set.
 ###### Mask Prediction
 ![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_MP_0530.jpg)
 ###### Mask Ground-Truth
@@ -93,12 +96,9 @@ Data-load strategy used is as follows:
 - Total data-set of 400K images were split into 280K training images and 120K testing images.(70:30 split).
 - A log file having details of FG_BG and its corresponding background image was created. 
 - Images (fg_bg, its bg, ground truth mask & ground truth depth) were selected randomly from this 280K set of images using dataloader  for training .
-- To manage training time, images were resized to (64,64), (96,96) and (192,192) from original size of (192,192) and divided into cohorts of 120K (for 64x64), 120K (for 96x96) and 40K (for 192,192).
-- Training was done for initial 6 epochs with (64,64) for 120K images.
-- Next 3 epochs were trained with (96,96) for next 120K images.
-- Final 1 epoch was trained with original size of (192,192) for remaining 40K images. These were done keeping Mask Convolution layers frozen.
-- Then testing was done for in similar manner for same number of epochs (6+2+1) with Depth convolution layers frozen. 
-- Model was saved after 500 batches during training. weights saved were carried over for further training by loading the model from last saved weights (application of transfer learning).
+- To manage training time, images were resized to (64,64), (96,96) and (192,192) from original size of (192,192) and divided into cohorts of 80K, 80K, 60K (for 64x64), 40K (for 96x96) and 20K (for 192,192).
+- Whole 120K test images were resized to (64,64).
+- Weights were smoothly transferred by one size to another size (transfer learning).
 - Source code for dataloader and transforms can be seen in https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/dataset
 
 ## Network
