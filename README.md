@@ -58,7 +58,9 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_test_log.txt
 ###### Link to Train-Logs :
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S14_train_log.txt
-
+###### Loss Function source-code:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train.py
 #### Training-4
 - Same strategy and data split as in Training-3 was adopted. For each epoch, trained network was tested against the entire test-set images of 120K images. 
 - One improvement was that albumentation transforms were used. Apart from resizing, following transforms were used:
@@ -90,6 +92,9 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_test_log.txt
 ###### Link to Train-Logs :
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_train_log.txt
+###### Loss Function source-code:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train.py
 
 ### Data-Load
 Data-load strategy used is as follows:
