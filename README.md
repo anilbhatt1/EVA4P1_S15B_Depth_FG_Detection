@@ -69,7 +69,7 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 - Mask  -> This is ground-truth. Hence only resize based on epoch was only used.
 - Depth -> This is ground-truth. Hence only resize based on epoch was only used.
 - Test Images -> Only resize was used. Wanted to keep all other parameters intact as present in original image.
-- Results and logs of the same are shown as below.
+- Results and logs of the same are shown as below. Mask prediction quality is seen as going down.
 ###### Mask Prediction
 ![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S17_MP_0530.jpg)
 ###### Mask Ground-Truth
