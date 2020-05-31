@@ -95,6 +95,35 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 ###### Loss Function source-code:
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test.py
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train.py
+#### Training-5
+- Instead of DiceLoss(), BCELOSS() was used for Mask. SSIM was retained for Depth. Loss functions were modified to use BCELOSS for Mask.
+- Training was done 4 epochs. First 2 epochs with mask layer frozen (trained for depth parameters) & next 2 epochs with depth layer frozen(trained for mask parameters). For each a test-set of 40K images were tested.
+- 0 - 80k    -> size 64x64      |  -> Training Data                 
+- 80k - 160k -> size 64x64      |
+- 360k -400k -> size 64x64 -> Test dataset
+- All other strategies remains same as from Training-4
+- Results and logs of the same are shown as below. Mask prediction results improved really well.
+- Combination gave promising results with best values of MaskIOU-0.85170 & DepthIOU-0.71749
+###### Mask Prediction
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_MP_0531.jpg)
+###### Mask Ground-Truth
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_MA_0531.jpg)
+###### Depth Prediction
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_DP_0531.jpg)
+###### Depth Ground-Truth
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_DA_0531.jpg)
+###### FGBG
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_FGBG_0531.jpg)
+###### Loss Plots
+![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_LossPlot_0531.png)
+###### Link to main ipynb file : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction_BCE_SSIM.ipynb	
+###### Link to Test-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_test_log.txt
+###### Link to Train-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S19_train_log.txt
+###### Loss Function source-code:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test1.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train1.py
 
 ### Data-Load
 Data-load strategy used is as follows:
