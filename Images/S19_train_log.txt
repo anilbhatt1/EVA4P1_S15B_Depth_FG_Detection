@@ -1,0 +1,12 @@
+ Train Epoch-1|Batch-0|Loss-0.70469|MaskLoss-0.27758|DepthLoss-0.14954|MaskIOU-0.43418|DepthIOU-0.25437
+ Train Epoch-1|Batch-832|Loss-0.65439|MaskLoss-0.27448|DepthLoss-0.10543|MaskIOU-0.43192|DepthIOU-0.64068
+*Train Epoch-1|Batch-833|Loss-0.64910|MaskLoss-0.26907|DepthLoss-0.11097|MaskIOU-0.44625|DepthIOU-0.60649
+ Train Epoch-2|Batch-0|Loss-0.66204|MaskLoss-0.27532|DepthLoss-0.11140|MaskIOU-0.44113|DepthIOU-0.61899
+ Train Epoch-2|Batch-832|Loss-0.61004|MaskLoss-0.25364|DepthLoss-0.10277|MaskIOU-0.46407|DepthIOU-0.62236
+*Train Epoch-2|Batch-833|Loss-0.64288|MaskLoss-0.26757|DepthLoss-0.10773|MaskIOU-0.44731|DepthIOU-0.61762
+ Train Epoch-3|Batch-0|Loss-0.60357|MaskLoss-0.24834|DepthLoss-0.10689|MaskIOU-0.48337|DepthIOU-0.63843
+ Train Epoch-3|Batch-832|Loss-0.44092|MaskLoss-0.16630|DepthLoss-0.10832|MaskIOU-0.67744|DepthIOU-0.65385
+*Train Epoch-3|Batch-833|Loss-0.46905|MaskLoss-0.18086|DepthLoss-0.10733|MaskIOU-0.64924|DepthIOU-0.63541
+ Train Epoch-4|Batch-0|Loss-0.44005|MaskLoss-0.16674|DepthLoss-0.10657|MaskIOU-0.68605|DepthIOU-0.62638
+ Train Epoch-4|Batch-832|Loss-0.42621|MaskLoss-0.16135|DepthLoss-0.10351|MaskIOU-0.69485|DepthIOU-0.64787
+*Train Epoch-4|Batch-833|Loss-0.42801|MaskLoss-0.16093|DepthLoss-0.10615|MaskIOU-0.68980|DepthIOU-0.63816
