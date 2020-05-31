@@ -12,6 +12,8 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 - Accuracy metric used was IOU. Since this is a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
 - Scheduler used was StepLR with initial LR of 0.01 & LR decaying by a factor of 0.1 for every 2 epochs.
 - Weights were saved at each epoch (per 500 batches) and these weights were carried over for further training by loading the model from last saved weights (application of transfer learning).
+- Training was done in a progressive manner. Initial trainings (say Training-1) were done with basic set-up. As training progresses, more items were tried out which is listed under relevant section. As mentioned in above point, weights saved at each training phase were used for training subsequent phase.
+- Results displayed below are from test epochs.
 #### Training-1
 - BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
 - Hence tried out SSIM for both mask and depth. As loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
