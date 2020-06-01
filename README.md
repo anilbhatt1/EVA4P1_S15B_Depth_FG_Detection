@@ -9,7 +9,7 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 - Network used was a custom one with 8,801,568 parameters. Details are present in 'Network' Section. Mask was predicted with 152,544 parameters. Even with this light weight network, decent results were achieved as listed above (images were complex as mentioned above ).
 - Since this is image comparison problem, final convolution layers were extracted and fed to the loss function. One-hot prediction layers were not included in network as this was not an image classification problem.
 - Network source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
-- Accuracy metric used was IOU. Since this is a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
+- Accuracy metric used was IOU. Since this was a pixel comparison between prediction and ground-truth, IOU serves as a good metric. Higher IOU for Pred vs Ground-Truth means model is doing well.
 - Scheduler used was StepLR with initial LR of 0.01 & LR decaying by a factor of 0.1 for every 2 epochs.
 - Weights were saved at each epoch (per 500 batches) and these weights were carried over for further training by loading the model from last saved weights (application of transfer learning).
 - Training was done in a progressive manner. Initial trainings (say Training-1) were done with basic set-up. As training progresses, more items were tried out which is listed under relevant section. As mentioned in above point, weights saved at each training phase were used for training subsequent phase.
@@ -17,7 +17,7 @@ Given a background image(bg) and same background image with a foreground(fg) obj
 #### Training-1
 - BCELoss, SSIM & DiceLoss were tried out. Mask was coming out well for BCELoss and Diceloss whereas Depth was not improving.
 - Hence tried out SSIM for both mask and depth. As loss for mask was less compared to depth, eventually mask predictions were coming fully dark while depth was coming out well.
-- It became evident that same loss function cant be used for both mask & depth. Also, training both together is not helping as one loss is getting priority over another. 
+- It became evident that same loss function cant be used for both mask & depth. Also, training both together was not helping as one loss was getting priority over another. 
 - Since mask was coming out well with diceloss & depth was coming out well with SSIM, it was decided to use different loss functions for each. 
 - Transfer learning was put into use to make sure that losses are not contradicting each other. 
 - Log is not available of this training as logging mechansim was not proper & colab stopped displaying beyond a point.
