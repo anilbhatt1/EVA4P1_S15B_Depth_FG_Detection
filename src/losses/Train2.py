@@ -73,11 +73,11 @@ class Training_loss1:
                 print('Train Epoch:{} Batch_ID: {} [{}/{} ({:.0f}%)]\tLoss:{:.5f} Mask_Loss:{:.5f} Dpth_Loss:{:.5f} Mask_IOU:{:.5f} Dpth_IOU: {:.5F}'
                       .format(epoch, batch_idx, batch_idx * batch_size, len(train_loader.dataset), (100. * batch_idx / len(train_loader)),
                        loss, loss1, loss2, mask_iou, depth_iou))
-                flg = self.draw_and_save(output[0].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
-                flg = self.draw_and_save(data['f3'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
-                flg = self.draw_and_save(output[1].detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
-                flg = self.draw_and_save(data['f4'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
-                flg = self.draw_and_save(data['f1'].detach().cpu(), f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(output[0].detach().cpu(),mask_mean, mask_stdev, f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f3'].detach().cpu(),mask_mean, mask_stdev, f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(output[1].detach().cpu(),depth_mean, depth_stdev, f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f4'].detach().cpu(),depth_mean, depth_stdev, f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
+                flg = self.draw_and_save(data['f1'].detach().cpu(), fg_bg_mean, fg_bg_stdev, f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')
                 string = f' Train Epoch-{int(epoch)}|Batch-{int(batch_idx)}|Loss-{loss:.5f}|MaskLoss-{loss1:.5f}|DepthLoss-{loss2:.5f}|MaskIOU-{mask_iou:.5f}|DepthIOU-{depth_iou:.5f}'
                 wrt = self.log_write(string, log_file)                
               
