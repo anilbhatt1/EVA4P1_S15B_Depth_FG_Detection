@@ -134,18 +134,18 @@ Data-load strategy used is as follows:
 - Images (fg_bg, its bg, ground truth mask & ground truth depth) were selected randomly from this 280K set of images using dataloader  for training .
 - To manage training time, images were resized to (64,64), (96,96) and (192,192) from original size of (192,192) and divided into cohorts of 80K, 80K, 60K (for 64x64), 40K (for 96x96) and 20K (for 192,192).
 - Whole 120K test images were resized to (64,64).
-- Weights were smoothly transferred by one size to another size (transfer learning).
+- Weights were smoothly transferred between one size to another size (transfer learning).
 - Source code for dataloader and transforms can be seen in https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/dataset
 
 ## Network
 - Network used was custom one. Architecture is as shown below. Total Parameters : 8,801,568
 - Mask was predicted with 152,544 parameters.
 - Source Code : https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/models/S15_FGDepth_models.py
-- Bilinear interpolation with a scale factor of 2 to upsize during depth prediction. Along with this, transpose convolutions were also  employed during upsizing to enable convolution without padding while maintaining size.
+- Bilinear interpolation with a scale factor of 2 was used to upsize during depth prediction. Along with this, transpose convolutions were also  employed during upsizing to enable convolution without padding while maintaining size.
 ![Architecture](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/EVA15%20Network.jpg)
 ## Loss Functions
 - BCELOSS, SSIM and Diceloss were tried out.
-- For final runs, Diceloss was used for mask and SSIM for depth.
+- For final runs, BCELOSS was used for mask and SSIM for depth.
 - IOU was used as accuracy metric.
 - Source code for test and train loss functions can be see here https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/losses
 ## Further improvements Plans
