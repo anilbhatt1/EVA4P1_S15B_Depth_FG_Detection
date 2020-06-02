@@ -109,7 +109,7 @@ class Training_loss1:
         iou_score = np.sum(intersection) / np.sum(union)
         return iou_score
         
-    def draw_and_save(self, tensors, name, mean, stdev, figsize=(15,15), *args, **kwargs):
+    def draw_and_save(self, tensors, mean, stdev, name, figsize=(15,15), *args, **kwargs):
           try:
             tensors = tensors.detach().cpu()
           except:
