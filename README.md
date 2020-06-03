@@ -126,6 +126,16 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 ###### Loss Function source-code:
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test1.py
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train1.py
+#### Training-6
+- Included normalization into albumentation transforms. Mean and stddev values arrived at during S15-A was used for FG_BG, BG, mask and depth.
+- Mask Loss was getting huge even while testing with 1000 images. Depth loss was doing fine. Was not able to fix the loss explosion problem with mask losses. Planning to take it up and fix in future.
+- Training and test losses customized to unnormalize and save the images in gdrive is as below:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train2.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test2.py
+- Link to ipynb file where mask output and mask input was unnormalized and fed to loss function is as below. Mask loss was not going high but mask predictions were bad.
+https://github.com/anilbhatt1/EVA4P1_S15B_Colab_Notebook_Versions/blob/master/Colab_Versions/EVA4P1_S15_Comb_FG_Depth_Prediction_V20_Normalization.ipynb
+- Link to ipynb file where normalized images and predictions were directly fed to loss function is as below. Mask loss can be seen as getting exploded.
+https://github.com/anilbhatt1/EVA4P1_S15B_Colab_Notebook_Versions/blob/master/Colab_Versions/EVA4P1_S15_Comb_FG_Depth_Prediction_V21_Normalization.ipynb
 
 ### Data-Load
 Data-load strategy used is as follows:
@@ -150,6 +160,6 @@ Data-load strategy used is as follows:
 - Source code for test and train loss functions can be see here https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/tree/master/src/losses
 ## Further improvements Plans
 - Go for a deeper network to further improve mask & depth predictions. 
-- Use Albumentation data transforms - Normalization.
+- Use Albumentation data transforms - Normalization. (Refer Training-6, tried normalization but not working fine)
 - Use tensor-board.
 - Use One-cycle LR policy.
