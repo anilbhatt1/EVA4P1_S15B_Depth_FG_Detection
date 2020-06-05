@@ -16,6 +16,9 @@ depth_mean, depth_stdev                    = [0.32939295], [0.24930712]
 bg_mean, bg_stdev                          = [0.58245822, 0.51269352, 0.43691653], [0.24252189, 0.24318804, 0.25401604]
 
 # # class for Calculating and storing training losses and training accuracies of model for each batch per epoch ## 
+# Improved from Train1.py. Modified draw-save function to unnormalize & save the image.
+# Carried over Previous Version - IOU, Logging to gdrive in a txt file and using BCE loss so no need to convert to int64 for mask output.
+
 class Training_loss1: 
     def train_loss_calc(self,model, device, train_loader, optimizer, epoch, criterion1, criterion2, batch_size, path_name,path_model_save,
                         scheduler=None, model_save_idx=500, img_save_idx=500,maxlr=0):

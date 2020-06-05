@@ -16,6 +16,9 @@ mask_mean,  mask_stdev                     = [0.20249742], [0.39961225]
 depth_mean, depth_stdev                    = [0.32939295], [0.24930712]
 bg_mean, bg_stdev                          = [0.58245822, 0.51269352, 0.43691653], [0.24252189, 0.24318804, 0.25401604]
 # # class for Calculating and storing testing losses and testing accuracies of model for each epoch ## 
+# Improved from Test1.py. Modified draw-save function to unnormalize & save the image.
+# Carried over Previous Version - IOU, Logging to gdrive in a txt file and using BCE loss so no need to convert to int64 for mask output.
+
 class Testing_loss1:
 
       def test_loss_calc(self,model, device, test_loader, optimizer, epoch, criterion1, criterion2, batch_size, path_name, scheduler=None, img_save_idx =500):

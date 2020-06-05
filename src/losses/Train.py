@@ -12,6 +12,8 @@ from kornia.losses import SSIM
 from kornia.losses import DiceLoss
 
 # # class for Calculating and storing training losses and training accuracies of model for each batch per epoch ## 
+# Basic Version - Dice Loss for mask, IOU, Logging to gdrive in a txt file and draw-save function to save images.
+
 class Training_loss: 
     def train_loss_calc(self,model, device, train_loader, optimizer, epoch, criterion1, criterion2, batch_size, path_name,path_model_save,
                         scheduler=None, model_save_idx=500, img_save_idx=500,maxlr=0):

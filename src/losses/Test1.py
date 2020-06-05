@@ -12,6 +12,9 @@ from kornia.losses import SSIM
 from kornia.losses import DiceLoss
 
 # # class for Calculating and storing testing losses and testing accuracies of model for each epoch ## 
+# Improved from Test.py. Switched from Dice loss to BCE loss so no need to convert to int64 for mask output. 
+# Carried over Basic Version - IOU, Logging to gdrive in a txt file and draw-save function to save images.
+
 class Testing_loss1:
 
       def test_loss_calc(self,model, device, test_loader, optimizer, epoch, criterion1, criterion2, batch_size, path_name, scheduler=None, img_save_idx =500):
