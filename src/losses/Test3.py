@@ -124,21 +124,8 @@ class Testing_loss1:
                      inp[i,j] = ((inp[i,j] * inp_stdev[j]) + inp_mean[j])     
         return inp        
        
-      def draw_and_save(self, tensors, mean, stdev, name, figsize=(15,15), *args, **kwargs):
-          try:
-            tensors = tensors.detach().cpu()
-          except:
-            pass
-            
-          tensor_mean   = mean
-          tensor_stdev  = stdev
-          for i in range(tensors.shape[0]):
-              if tensors.shape[1] ==3:
-                 for j in range(0,3):  
-                     tensors[i,j] = ((tensors[i,j] * tensor_stdev[j]) + tensor_mean[j])
-              if tensors.shape[1] ==1:
-                 for j in range(0,1):  
-                     tensors[i,j] = ((tensors[i,j] * tensor_stdev[j]) + tensor_mean[j])            
+      def draw_and_save(self, tensors, name, figsize=(15,15), *args, **kwargs):
+          
             
           grid_tensor = torchvision.utils.make_grid(tensors, *args, **kwargs)
           grid_image  = grid_tensor.permute(1, 2, 0)
