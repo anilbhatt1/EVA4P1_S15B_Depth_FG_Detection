@@ -77,11 +77,11 @@ class Testing_loss1:
                   output_N_f4 = self.unnorm(data['f4'], depth_mean, depth_stdev)                
                   output_N_f1 = self.unnorm(data['f1'], fg_bg_mean, fg_bg_stdev)               
 
-                  flg = self.draw_and_save(output_N_0,  f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
-                  flg = self.draw_and_save(output_N_f3, f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
-                  flg = self.draw_and_save(output_N_1,  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
-                  flg = self.draw_and_save(output_N_f4, f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
-                  flg = self.draw_and_save(output_N_f1, f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')                                 
+                  flg = self.draw_and_save(output_N_0.detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_MP_{loss.item():.5f}.jpg')
+                  flg = self.draw_and_save(output_N_f3.detach().cpu(), f'{path_name}{epoch}_{batch_idx}_MA_{loss.item():.5f}.jpg')
+                  flg = self.draw_and_save(output_N_1.detach().cpu(),  f'{path_name}{epoch}_{batch_idx}_DP_{loss.item():.5f}.jpg')
+                  flg = self.draw_and_save(output_N_f4.detach().cpu(), f'{path_name}{epoch}_{batch_idx}_DA_{loss.item():.5f}.jpg')
+                  flg = self.draw_and_save(output_N_f1.detach().cpu(), f'{path_name}{epoch}_{batch_idx}_FGBG_{loss.item():.5f}.jpg')                                 
                   string = f' Test Epoch-{int(epoch)}|Batch-{int(batch_idx)}|Loss-{loss:.5f}|MaskLoss-{loss1:.5f}|DepthLoss-{loss2:.5f}|MaskIOU-{mask_iou:.5f}|DepthIOU-{depth_iou:.5f}'
                   wrt = self.log_write(string, log_file)
             
