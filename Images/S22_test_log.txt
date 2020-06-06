@@ -1,0 +1,24 @@
+ Test Epoch-1|Batch-0|Loss--7.24275|MaskLoss--3.73525|DepthLoss-0.22776|MaskIOU-0.82313|DepthIOU-0.75994
+ Test Epoch-1|Batch-1500|Loss--6.08710|MaskLoss--3.16940|DepthLoss-0.25170|MaskIOU-0.72095|DepthIOU-0.58593
+ Test Epoch-1|Batch-3000|Loss--5.64252|MaskLoss--2.92529|DepthLoss-0.20806|MaskIOU-0.71115|DepthIOU-0.76967
+ Test Epoch-1|Batch-4500|Loss--5.24214|MaskLoss--2.73599|DepthLoss-0.22983|MaskIOU-0.66656|DepthIOU-0.79390
+ Test Epoch-1|Batch-4999|Loss--5.39372|MaskLoss--2.81057|DepthLoss-0.22743|MaskIOU-0.75445|DepthIOU-0.72667
+*Test Epoch-1|Batch-4999|Loss--5.64674|MaskLoss--2.93641|DepthLoss-0.22609|MaskIOU-0.72536|DepthIOU-0.70903
+ Test Epoch-2|Batch-0|Loss--12.80650|MaskLoss--6.54240|DepthLoss-0.27829|MaskIOU-0.79578|DepthIOU-0.57781
+ Test Epoch-2|Batch-1500|Loss--11.68476|MaskLoss--5.97110|DepthLoss-0.25745|MaskIOU-0.82483|DepthIOU-0.64210
+ Test Epoch-2|Batch-3000|Loss--12.75372|MaskLoss--6.50224|DepthLoss-0.25076|MaskIOU-0.75769|DepthIOU-0.64727
+ Test Epoch-2|Batch-4500|Loss--16.43539|MaskLoss--8.33934|DepthLoss-0.24329|MaskIOU-0.87228|DepthIOU-0.67593
+ Test Epoch-2|Batch-4999|Loss--12.17929|MaskLoss--6.22606|DepthLoss-0.27284|MaskIOU-0.78990|DepthIOU-0.49145
+*Test Epoch-2|Batch-4999|Loss--13.98577|MaskLoss--7.12155|DepthLoss-0.25735|MaskIOU-0.79901|DepthIOU-0.64699
+ Test Epoch-3|Batch-0|Loss--13.88569|MaskLoss--7.05230|DepthLoss-0.21891|MaskIOU-0.76215|DepthIOU-0.74005
+ Test Epoch-3|Batch-1500|Loss--15.86415|MaskLoss--8.03928|DepthLoss-0.21441|MaskIOU-0.78580|DepthIOU-0.72746
+ Test Epoch-3|Batch-3000|Loss--18.28689|MaskLoss--9.25747|DepthLoss-0.22805|MaskIOU-0.79853|DepthIOU-0.71865
+ Test Epoch-3|Batch-4500|Loss--16.17162|MaskLoss--8.21374|DepthLoss-0.25586|MaskIOU-0.78692|DepthIOU-0.51506
+ Test Epoch-3|Batch-4999|Loss--14.10836|MaskLoss--7.17485|DepthLoss-0.24134|MaskIOU-0.80136|DepthIOU-0.63026
+*Test Epoch-3|Batch-4999|Loss--16.01897|MaskLoss--8.12019|DepthLoss-0.22141|MaskIOU-0.80118|DepthIOU-0.70136
+ Test Epoch-4|Batch-0|Loss--18.79405|MaskLoss--9.50143|DepthLoss-0.20881|MaskIOU-0.80637|DepthIOU-0.76474
+ Test Epoch-4|Batch-1500|Loss--16.05753|MaskLoss--8.13851|DepthLoss-0.21949|MaskIOU-0.81374|DepthIOU-0.73092
+ Test Epoch-4|Batch-3000|Loss--16.91938|MaskLoss--8.56375|DepthLoss-0.20812|MaskIOU-0.84703|DepthIOU-0.78924
+ Test Epoch-4|Batch-4500|Loss--16.24627|MaskLoss--8.23306|DepthLoss-0.21985|MaskIOU-0.81590|DepthIOU-0.76524
+ Test Epoch-4|Batch-4999|Loss--13.01467|MaskLoss--6.62892|DepthLoss-0.24318|MaskIOU-0.77065|DepthIOU-0.65823
+*Test Epoch-4|Batch-4999|Loss--16.32783|MaskLoss--8.27404|DepthLoss-0.22023|MaskIOU-0.81417|DepthIOU-0.71024
