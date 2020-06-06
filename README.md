@@ -128,7 +128,7 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/los
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train1.py
 #### Training-6
 - Included normalization into albumentation transforms. Mean and stddev values arrived at during S15-A was used for FG_BG, BG, mask and depth.
-- Mask Loss was getting huge even while testing with 1000 images. Depth loss was doing fine. Was not able to fix the loss explosion problem with mask losses. Planning to take it up and fix in future.
+- Mask Loss was getting huge even while testing with 1000 images. Depth loss was doing fine. Was not able to fix the loss explosion problem with mask losses. 
 - Training and test losses customized to unnormalize and save the images in gdrive is as below:
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train2.py
 https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test2.py
@@ -136,6 +136,31 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/los
 https://github.com/anilbhatt1/EVA4P1_S15B_Colab_Notebook_Versions/blob/master/Colab_Versions/EVA4P1_S15_Comb_FG_Depth_Prediction_V20_Normalization.ipynb
 - Link to ipynb file where normalized images and predictions were directly fed to loss function is as below. Mask loss can be seen as getting exploded.
 https://github.com/anilbhatt1/EVA4P1_S15B_Colab_Notebook_Versions/blob/master/Colab_Versions/EVA4P1_S15_Comb_FG_Depth_Prediction_V21_Normalization.ipynb
+#### Training-7
+- Modified loss function to fix the mask loss explosion problem. Mask loss was still coming as negative however explosion problem git resolved. Also, IOU measure was coming good. Best results from test MaskIOU-0.84703 DepthIOU-0.78924
+- Loss functions were modified in such a way that output from model & input were unnormalized before loss calculations. 
+- Link to modified loss functions are as below:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test3.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train3.py
+- Training was done for 4 epochs. 1st & 3rd epoch with mask layers frozen while 2nd and 4th epoch with depth layers frozen. Each epoch were having 80K training images and 10K testing images.
+######  Link to ipynb file:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction_LossFn_Modified_for_Normalization.ipynb
+###### Link to Test-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_test_log.txt
+###### Link to Train-Logs :
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_train_log.txt
+###### Mask Prediction
+![Mask_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_MP_0605.jpg)
+###### Mask Ground-Truth
+![Mask_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_MA_0605.jpg)
+###### Depth Prediction
+![Depth_Prediction](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_DP_0605.jpg)
+###### Depth Ground-Truth
+![Depth_GT](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_DA_0605.jpg)
+###### FGBG
+![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_FGBG_0605.jpg)
+###### Loss Plots
+![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_LossPlot_0605.png)
 
 ### Data-Load
 Data-load strategy used is as follows:
