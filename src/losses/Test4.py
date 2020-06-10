@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from kornia.losses import SSIM
 from kornia.losses import DiceLoss
 from torch.utils.tensorboard import SummaryWriter
+from time import time
 
 # # class for Calculating and storing testing losses and testing accuracies of model for each epoch ## 
 # Improved from Test3.py. Removed normalization as this version wont be using normalized albumentation transforms.
