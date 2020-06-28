@@ -192,5 +192,5 @@ Data-load strategy used is as follows:
 ## Further improvements Plans
 - Go for a deeper network to further improve mask & depth predictions. 
 - Use Albumentation data transforms - Normalization. (Refer Training-6, tried normalization but not working fine)
-- Use tensor-board. (Refer Training-7, enabled tensorboard for scalars. Need to capture images and other parameters)
+- Use tensor-board. (Refer Training-8, enabled tensorboard for scalars. Need to capture images and other parameters)
 - Use One-cycle LR policy.
