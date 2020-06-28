@@ -161,7 +161,13 @@ https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/
 ![FGBG](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_FGBG_0605.jpg)
 ###### Loss Plots
 ![Loss_Plots](https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/Images/S22_LossPlot_0605.png)
-
+#### Training-8
+- Enabled tensor board to capture few scalars.
+- Link to modified loss functions are as below:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Test4.py
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/src/losses/Train4.py
+######  Link to ipynb file:
+https://github.com/anilbhatt1/EVA4P1_S15B_Depth_FG_Detection/blob/master/EVA4P1_S15_Comb_FG_Depth_Prediction_TensorBoard.ipynb
 ### Data-Load
 Data-load strategy used is as follows:
 - Total data-set of 400K images were split into 280K training images and 120K testing images.(70:30 split).
@@ -186,5 +192,5 @@ Data-load strategy used is as follows:
 ## Further improvements Plans
 - Go for a deeper network to further improve mask & depth predictions. 
 - Use Albumentation data transforms - Normalization. (Refer Training-6, tried normalization but not working fine)
-- Use tensor-board.
+- Use tensor-board. (Refer Training-7, enabled tensorboard for scalars. Need to capture images and other parameters)
 - Use One-cycle LR policy.
